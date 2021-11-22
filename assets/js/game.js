@@ -1,7 +1,9 @@
-console.log(enemy.names);
-console.log(enemy.names.length);
-console.log(enemy.names[0]);
-console.log(enemy.names[3]);
+
+var randomNumber = function(min, max) {
+    var value = Math.floor(Math.random() * (max - min + 1) + min);
+  
+    return value;
+  };
 
 var fight = function (enemy) {
   while (playerInfo.health > 0 && enemy.health > 0) {
@@ -83,49 +85,6 @@ var fight = function (enemy) {
   }
 };
 
-var playerInfo = {
-  name: window.prompt("What is your robot's name?"),
-  health: 100,
-  attack: 10,
-  money: 10,
-  reset: function () {
-    this.health = 100;
-    this.money = 10;
-    this.attack = 10;
-  }, // coma!
-  refillHealth: function () {
-    if (this.money >= 7) {
-      this.health += 20;
-      this.money -= 7;
-    } else {
-      window.alert("You don't have enough money!");
-    }
-  },
-  upgradeAttack: function () {
-    if (this.money >= 7) {
-      this.attack += 6;
-      this.money -= 7;
-    } else {
-      window.alert("You don't have enough money!");
-    }
-  },
-};
-
-var enemyInfo = [
-  {
-    name: "Roborto",
-    attack: randomNumber(10, 14),
-  },
-  {
-    name: "Amy Adroid",
-    attack: randomNumber(10, 14),
-  },
-  {
-    name: "Robo Trumble",
-    attack: randomNumber(10, 14),
-  },
-];
-
 var startGame = function () {
   // reset player stats
   playerInfo.reset();
@@ -134,7 +93,7 @@ var startGame = function () {
     if (playerInfo.health > 0) {
       // let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
       window.alert("Welcome to Robot Gladiators! Round " + (i + 1));
-
+    
       // pick new enemy to fight based on the index of the enemy.names array
       var pickedEnemyObj = enemyInfo[i];
 
@@ -214,11 +173,69 @@ var shop = function () {
   }
 };
 
-// function to generate a random numeric value
-var randomNumber = function (min, max) {
-  var value = Math.floor(Math.random() * (max - min + 1) + min);
+// function to set player name
+var getPlayerName = function() {
+    var name = "";
 
-  return value;
-};
+while (name === "" || name === null) {
+    name = prompt("What is your robot's name");
+}
+
+    console.log("Your robot's name is " + name);
+    return name;
+}
+
+var playerInfo = {
+    name: getPlayerName(),
+    health: 100,
+    attack: 10,
+    money: 10,
+    reset: function () {
+      this.health = 100;
+      this.money = 10;
+      this.attack = 10;
+    }, // coma!
+    refillHealth: function () {
+      if (this.money >= 7) {
+        this.health += 20;
+        this.money -= 7;
+      } else {
+        window.alert("You don't have enough money!");
+      }
+    },
+    upgradeAttack: function () {
+      if (this.money >= 7) {
+        this.attack += 6;
+        this.money -= 7;
+      } else {
+        window.alert("You don't have enough money!");
+      }
+    },
+  };
+  
+  var enemyInfo = [
+    {
+      name: "Roborto",
+      attack: randomNumber(10, 14),
+    },
+    {
+      name: "Amy Adroid",
+      attack: randomNumber(10, 14),
+    },
+    {
+      name: "Robo Trumble",
+      attack: randomNumber(10, 14),
+    },
+  ];
+  
+
+console.log(enemyInfo);
+console.log(enemyInfo[0]);
+console.log(enemyInfo[0].name);
+console.log(enemyInfo[0]['attack']);
+
+
+// End Game info
+
 // start the game when the page loads
 startGame();
